@@ -1,33 +1,26 @@
-
-export type DataType = {
-  legs: L
+type Caption = {
+  caption: string
+  uid: string
 }
 
-type L = {
-  [index:number]: Legs
+type Info = {
+  airline: Caption
+  departureCity: Caption
+  departureAirport: Caption
+  arrivalAirport: Caption
+}
+
+type Segments = {
+  [index: number]: Info
+}
+
+export type LegElement = {
+  duration: number
+  segments: Segments
 }
 
 export type Legs = {
-  segments: Item
-  duration: number
-}
-
-type Item = {
-  map(arg0: (el: El) => void): import("react").ReactNode
-  length: number
-  [index:number]: El
-}
-
-type El = {
-  airline: City
-  arrivalAirport: City
-  departureAirport: City
-  length: number
-  departureCity: City
-  arrivalCity: City
-}
-
-type City = {
-  caption: string
-  uid: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  legs: any
+  [index: number]: LegElement
 }

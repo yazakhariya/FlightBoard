@@ -1,9 +1,11 @@
+
 import Back from './components/Back/Back'
 import Forward from './components/Forward/Forward'
-import { DataType } from './types'
+import { Legs } from './types'
+
 
 type Props = {
-    data: DataType
+    data: Legs
 }
 
 export default function CardBody({ data }: Props) {

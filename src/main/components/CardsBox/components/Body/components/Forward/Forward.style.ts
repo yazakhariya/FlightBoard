@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const Wrapper = styled.div`
-  border-bottom: solid 3px blue;
+  border-bottom: solid 3px #1ca3ec;
   padding: 10px;
 `
 

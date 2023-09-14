@@ -1,3 +1,4 @@
+
 type Carrier = {
   airlineCode: string
   caption: string
@@ -24,5 +25,5 @@ type Price = {
 
 export type DataType = {
   price: Price
-  carrier: Carrier 
+  carrier: Carrier
 }

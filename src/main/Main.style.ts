@@ -5,8 +5,8 @@ export const MainWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  padding: 30px;
+  justify-content: center;
+  padding: 50px;
   background-color: #eaece1;
   gap: 30px;
 `

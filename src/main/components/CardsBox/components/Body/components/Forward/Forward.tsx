@@ -1,11 +1,12 @@
-import { Legs } from '../../types'
+import { LegElement } from '../../types'
 import * as S from './Forward.style'
 
 type Props = {
-  data: Legs
+  data: LegElement
 }
 
 export default function Forward({ data }: Props) {
+  
   function getTimeFromMins(mins: number) {
     const hours = Math.trunc(mins / 60)
     const minutes = mins % 60

@@ -1,13 +1,7 @@
 import * as S from './SortPrice.style'
 import UiInput from 'src/components/UiInput/UiInput'
-// import { flights } from 'src/mockData/flights'
 
 export default function SortPrice() {
-  // const amount = flights.map((item) =>
-  //   item.result.bestPrices.ONE_CONNECTION.bestFlights.map(
-  //     (price) => price.price.amount
-  //   )
-  // )
 
   return (
     <S.FiltersBoxWrapper>

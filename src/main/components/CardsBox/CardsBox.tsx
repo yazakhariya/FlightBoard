@@ -8,14 +8,20 @@ export default function CardsBox() {
   const flight = flights.map((item) =>
     item.result.flights.map((card) => card.flight)
   )
+
+  function handleButtonClick() {
+ //todo
+  }
+
   return (
     <S.CardsBoxWrapper>
       {flight[0].map((card, i: number) => { 
+
         return (
           <S.Card key={i}>
             <CardHead data={card} />
             <CardBody data={card} />
-            <UiButton children={'Выбрать'} />
+            <UiButton onClick={handleButtonClick} children={'Выбрать'} />
           </S.Card>
         )
       })}
