@@ -1,13 +1,5 @@
 import { styled } from 'styled-components'
 
-export const CardsBoxWrapper = styled.div`
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: fit-content;
-`
-
 export const Card = styled.div`
   display: flex;
   flex-direction: column;

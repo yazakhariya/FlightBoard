@@ -1,11 +1,11 @@
-import { LegsComponent } from '../../types'
-import * as S from './Back.style'
+import { LegElement } from '../../types'
+import * as S from './UpperPart.style'
 
 type Props = {
-  data: LegsComponent
+  data: LegElement
 }
 
-export default function Back({ data }: Props) {
+export default function UpperPart({ data }: Props) {
   function getTimeFromMins(mins: number) {
     const hours = Math.trunc(mins / 60)
     const minutes = mins % 60
@@ -16,7 +16,7 @@ export default function Back({ data }: Props) {
     <S.Wrapper>
       <S.Cities>
         <S.Name>
-          {data?.segments[0]?.departureCity?.caption},{' '}
+          {data.segments[0].departureCity.caption},{' '}
           {data.segments[0].departureAirport.caption} (
           {data.segments[0].departureAirport.uid}){' '}
         </S.Name>
@@ -42,7 +42,9 @@ export default function Back({ data }: Props) {
         <S.Segments>Без пересадок </S.Segments>
       )}
 
-      <S.Airline>Рейс выполняет: <b>{data.segments[0].airline.caption}</b></S.Airline>
+      <S.Airline>
+        Рейс выполняет: <b>{data.segments[0].airline.caption}</b>
+      </S.Airline>
     </S.Wrapper>
   )
 }

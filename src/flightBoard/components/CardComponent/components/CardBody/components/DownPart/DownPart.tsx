@@ -1,12 +1,11 @@
 import { LegElement } from '../../types'
-import * as S from './Forward.style'
+import * as S from './DownPart.style'
 
 type Props = {
   data: LegElement
 }
 
-export default function Forward({ data }: Props) {
-  
+export default function DownPart({ data }: Props) {
   function getTimeFromMins(mins: number) {
     const hours = Math.trunc(mins / 60)
     const minutes = mins % 60
@@ -17,7 +16,7 @@ export default function Forward({ data }: Props) {
     <S.Wrapper>
       <S.Cities>
         <S.Name>
-          {data.segments[0].departureCity.caption},{' '}
+          {data?.segments[0]?.departureCity?.caption},{' '}
           {data.segments[0].departureAirport.caption} (
           {data.segments[0].departureAirport.uid}){' '}
         </S.Name>

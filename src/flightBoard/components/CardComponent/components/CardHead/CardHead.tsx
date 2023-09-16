@@ -1,4 +1,4 @@
-import { DataType } from 'src/main/components/CardsBox/components/Head/types'
+import { DataType } from './types'
 import * as S from './CardHead.style'
 
 type Props = {

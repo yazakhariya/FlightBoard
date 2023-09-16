@@ -10,3 +10,11 @@ export const MainWrapper = styled.div`
   background-color: #eaece1;
   gap: 30px;
 `
+
+export const CardsBoxWrapper = styled.div`
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: fit-content;
+`
