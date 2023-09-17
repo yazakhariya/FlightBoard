@@ -1,8 +1,8 @@
-import { DataType } from './types'
+import { Flight } from './types'
 import * as S from './CardHead.style'
 
 type Props = {
-  data: DataType
+  data: Flight
 }
 
 export default function CardHead({ data }: Props) {

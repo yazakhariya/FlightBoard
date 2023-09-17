@@ -3,11 +3,12 @@ import * as S from './UiButton.style'
 type Props = {
   onClick?: () => void
   children: React.ReactNode
+  disabled?: boolean
 }
 
-const UiButton = ({ onClick, children }: Props) => {
+const UiButton = ({ onClick, children, disabled }: Props) => {
   return (
-    <S.Button onClick={onClick}>
+    <S.Button disabled={disabled} onClick={onClick}>
       {children}
     </S.Button>
   )

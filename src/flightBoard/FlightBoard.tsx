@@ -1,167 +1,148 @@
 import * as React from 'react'
-import * as C from './FlightBoard.style'
+import * as S from './FlightBoard.style'
 import { flights } from 'src/mockData/flights'
 import Component from './components/CardComponent/CardComponent'
-import * as S from 'src/flightBoard/components/Filters/Filters.style'
-import UiInput from 'src/components/UiInput/UiInput'
+import NotFound from './components/NotFound/NotFound'
+import SortingFilter from './components/Filters/SortingFilter'
+import SegmentFilter from './components/Filters/SegmentFilter'
+import CostFilter from './components/Filters/CostFilter'
+import AirlinesFilter from './components/Filters/AirlinesFilter'
 import UiButton from 'src/components/UiButton/UiButton'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function FlightBoard() {
-  const els = flights[0].result.flights
+  const elements = flights[0].result.flights
   const [value, setValue] = React.useState<string>('')
-  const [priceMin, setPriceMin] = React.useState<string>('')
-  const [priceMax, setPriceMax] = React.useState<string>('')
-  const [filtered, setFiltered] = React.useState(els)
-
-  // Фильт-компонент по возрастанию цены, убыванию и времени в пути
-  const SortingFilter = (
-    <S.FiltersBoxWrapper>
-      <S.Header>Сортировать</S.Header>
-      <S.FilterComponent>
-        <UiInput
-          onChange={(e) => setValue(e.target.value)}
-          type="radio"
-          value="- по возрастанию цены"
-        />
-        <label> - по возрастанию цены</label>
-      </S.FilterComponent>
-      <S.FilterComponent>
-        <UiInput
-          onChange={(e) => setValue(e.target.value)}
-          type="radio"
-          value="- по убыванию цены"
-        />
-        <label> - по убыванию цены</label>
-      </S.FilterComponent>
-      <S.FilterComponent>
-        <UiInput
-          onChange={(e) => setValue(e.target.value)}
-          type="radio"
-          value="- по времени в пути"
-        />
-        <label> - по времени в пути</label>
-      </S.FilterComponent>
-    </S.FiltersBoxWrapper>
-  )
-
-  const SegmentsFilter = (
-    <S.FiltersBoxWrapper>
-      <S.Header>Фильтровать</S.Header>
-      <S.FilterComponent>
-        <UiInput
-          onChange={(e) => setValue(e.target.value)}
-          type="radio"
-          value="1 пересадка"
-        />
-        <label>1 пересадка</label>
-      </S.FilterComponent>
-      <S.FilterComponent>
-        <UiInput
-          onChange={(e) => setValue(e.target.value)}
-          type="radio"
-          value="без пересадок"
-        />
-        <label>без пересадок</label>
-      </S.FilterComponent>
-    </S.FiltersBoxWrapper>
-  )
-
-  const CostFilter = (
-    <S.FiltersBoxWrapper>
-      <S.Header>Цена</S.Header>
-      <S.CostBox>
-        <S.FilterComponent>
-          <span>От</span>
-          <UiInput
-            onChange={(e) => setPriceMin(e.target.value)}
-            type="number"
-            placeholder="0"
-          />
-        </S.FilterComponent>
-        <S.FilterComponent>
-          <span>До</span>
-          <UiInput
-            onChange={(e) => setPriceMax(e.target.value)}
-            type="number"
-            placeholder="10 000"
-          />
-        </S.FilterComponent>
-        <UiButton onClick={() => handleButtonClick()} children={'Поиск'} />
-      </S.CostBox>
-    </S.FiltersBoxWrapper>
-  )
+  const [filtered, setFiltered] = React.useState(elements)
+  const [visible, setVisible] = React.useState(2)
 
   function handleButtonClick() {
-    if (priceMin || priceMax) {
-      const price = els.filter(
-        (el) =>
-          Number(priceMin) <= Number(el.flight.price.total.amount) &&
-          Number(el.flight.price.total.amount) <= Number(priceMax)
-      )
-
-      setFiltered(price)
-    } else {
-      setFiltered(els)
-    }
+    setVisible((prevNumber) => prevNumber + 4)
   }
+
+  // фильтрация по значению
 
   const FilterCards = (
     <>
-      {value === '- по возрастанию цены'
-        ? filtered
+      {value === '- по возрастанию цены' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
             .sort(
               (a, b) =>
                 Number(a.flight.price.total.amount) -
                 Number(b.flight.price.total.amount)
             )
+            .slice(0, visible)
             .map((card, i: number) => {
-              return <div key={i}>{Component(card, i)}</div>
+              return <div key={i}><Component card={card.flight} i={i} /></div>
             })
-        : value === '- по убыванию цены'
-        ? filtered
+        )
+      ) : value === '- по убыванию цены' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
             .sort(
               (a, b) =>
                 Number(b.flight.price.total.amount) -
                 Number(a.flight.price.total.amount)
             )
+            .slice(0, visible)
             .map((card, i: number) => {
-              return <div key={i}>{Component(card, i)}</div>
+              return <div key={i}><Component card={card.flight} i={i} /></div>
             })
-        : value === '- по времени в пути'
-        ? filtered
+        )
+      ) : value === '- по времени в пути' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
             .sort(
               (a, b) => a.flight.legs[0].duration - b.flight.legs[0].duration
             )
+            .slice(0, visible)
             .map((card, i: number) => {
-              return <div key={i}>{Component(card, i)}</div>
+              return <div key={i}><Component card={card.flight} i={i} /></div>
             })
-        : value === '1 пересадка'
-        ? filtered
+        )
+      ) : value === '1 пересадка' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
             .filter((el) => el.flight.legs[0].segments.length === 2)
+            .slice(0, visible)
             .map((card, i: number) => {
-              return <div key={i}>{Component(card, i)}</div>
+              return <div key={i}><Component card={card.flight} i={i} /></div>
             })
-        : value === 'без пересадок'
-        ? filtered
+        )
+      ) : value === 'без пересадок' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
             .filter((el) => el.flight.legs[0].segments.length === 1)
+            .slice(0, visible)
             .map((card, i: number) => {
-              return <div key={i}>{Component(card, i)}</div>
+              return <div key={i}><Component card={card.flight} i={i} /></div>
             })
-        : filtered.map((card, i: number) => {
-            return <div key={i}>{Component(card, i)}</div>
-          })}
+        )
+      ) : value === 'LOT Polish Airlines' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
+            .filter((el) => el.flight.carrier.caption === value)
+            .slice(0, visible)
+            .map((card, i: number) => {
+              return <div key={i}><Component card={card.flight} i={i} /></div>
+            })
+        )
+      ) : value === 'Air France' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
+            .filter((el) => el.flight.carrier.caption === value)
+            .slice(0, visible)
+            .map((card, i: number) => {
+              return <div key={i}><Component card={card.flight} i={i} /></div>
+            })
+        )
+      ) : value === 'KLM' ? (
+        filtered.length === 0 ? (
+          <NotFound />
+        ) : (
+          filtered
+            .filter((el) => el.flight.carrier.caption === value)
+            .slice(0, visible)
+            .map((card, i: number) => {
+              return <div key={i}><Component card={card.flight} i={i} /></div>
+            })
+        )
+      ) : filtered.length === 0 ? (
+        <NotFound />
+      ) : (
+        filtered.slice(0, visible).map((card, i: number) => {
+          return <div key={i}><Component card={card.flight} i={i} /></div>
+        })
+      )}
     </>
   )
 
   return (
-    <C.MainWrapper>
-      <C.CardsBoxWrapper>
-        {SortingFilter ? SortingFilter : null}
-        {SegmentsFilter ? SegmentsFilter : null}
-        {CostFilter ? CostFilter : null}
+    <S.MainWrapper>
+      <S.FiltersWrapper>
+        <SortingFilter setValue={setValue} />
+        <SegmentFilter setValue={setValue} />
+        <CostFilter setFiltered={setFiltered} data={elements} />
+        <AirlinesFilter setValue={setValue} />
+      </S.FiltersWrapper>
+      <S.CardsBoxWrapper>
         {FilterCards ? FilterCards : null}
-      </C.CardsBoxWrapper>
-    </C.MainWrapper>
+        <UiButton onClick={handleButtonClick} children={'Показат ещё'} />
+      </S.CardsBoxWrapper>
+    </S.MainWrapper>
   )
 }

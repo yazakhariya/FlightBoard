@@ -6,27 +6,36 @@ type Props = {
   setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
-export default function SegmentFilter({ setValue }: Props) {
+export default function AirlinesFilter({ setValue }: Props) {
   return (
     <S.FiltersBoxWrapper>
-      <S.Header>Фильтровать</S.Header>
+      <S.Header>Авиакомпании</S.Header>
       <S.FilterComponent>
         <UiInput
           onChange={(e) => setValue(e.target.value)}
           type="checkbox"
           name="checkbox"
-          value="1 пересадка"
+          value="LOT Polish Airlines"
         />
-        <label>1 пересадка</label>
+        <label>LOT Polish Airlines от 21000р.</label>
       </S.FilterComponent>
       <S.FilterComponent>
         <UiInput
           onChange={(e) => setValue(e.target.value)}
           type="checkbox"
           name="checkbox"
-          value="без пересадок"
+          value="Air France"
         />
-        <label>без пересадок</label>
+        <label>Air France от 23000р.</label>
+      </S.FilterComponent>
+      <S.FilterComponent>
+        <UiInput
+          onChange={(e) => setValue(e.target.value)}
+          type="checkbox"
+          name="checkbox"
+          value="KLM"
+        />
+        <label>KLM от 24000р.</label>
       </S.FilterComponent>
     </S.FiltersBoxWrapper>
   )

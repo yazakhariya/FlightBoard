@@ -21,7 +21,7 @@ type Caption = {
   
   export type Legs = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    legs: any
+    legs?: any
     [index: number]: LegElement
   }
   
