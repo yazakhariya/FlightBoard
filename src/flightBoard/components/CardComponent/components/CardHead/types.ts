@@ -13,6 +13,7 @@ type Total = {
 
 type SinglePassengerTotal = {
   total: Total
+  singlePassengerTotal: Total
 }
 
 type PassPrice = {
