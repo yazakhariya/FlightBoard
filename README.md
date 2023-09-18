@@ -16,4 +16,4 @@ npm run dev
 ```
 ## Деплой проекта
 
-flight-board-nkf7.vercel.app
+https://flight-board-nkf7.vercel.app/
