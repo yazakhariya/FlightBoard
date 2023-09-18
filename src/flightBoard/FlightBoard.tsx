@@ -141,7 +141,7 @@ export default function FlightBoard() {
       </S.FiltersWrapper>
       <S.CardsBoxWrapper>
         {FilterCards ? FilterCards : null}
-        <UiButton onClick={handleButtonClick} children={'Показат ещё'} />
+        {filtered.length !== 0 ? <UiButton onClick={handleButtonClick} children={'Показат ещё'} /> : null}
       </S.CardsBoxWrapper>
     </S.MainWrapper>
   )

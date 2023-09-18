@@ -11,9 +11,9 @@ export const PageWrapper = styled.div`
 
 export const NotFoundMessage = styled.h2`
   padding-top: 20px;
-  width: 1000px;
+  width: 800px;
 `
 
 export const Img = styled.img`
-  width: 1000px;
+  width: 800px;
 `

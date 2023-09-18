@@ -13,12 +13,12 @@ export const Cities = styled.div`
 `
 
 export const Name = styled.span`
-  font-size: 25px;
+  font-size: 20px;
   padding: 15px;
 `
 
 export const Time = styled.div`
-  font-size: 25px;
+  font-size: 20px;
   padding: 15px;
   font-weight: 700;
 `

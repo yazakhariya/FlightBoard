@@ -18,7 +18,7 @@ export const Info = styled.div`
   align-items: flex-end;
 `
 export const Price = styled.span`
-  font-size: 29px;
+  font-size: 22px;
   font-weight: 600;
 `
 
