@@ -14,3 +14,6 @@ git clone https://github.com/yazakhariya/FlightBoard.git
 ```bash 
 npm run dev
 ```
+## Деплой проекта
+
+flight-board-nkf7.vercel.app
